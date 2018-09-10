@@ -11,6 +11,24 @@
  пользователем диаметра и с заливкой указанного цвета.
 */
 
+let checkColor = (color) => {
+    let regColor = /#[a-f0-9]{3}|#[a-f0-9]{6}|red|aqua|gray|navy|silver|black|green|olive|teal|blue|lime|purple|white|fuchsia|maroon|yellow|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+\s*)?\)/i;
+    if (!regColor.test(color)) {
+        console.log("Color is invalid! Color = '000000'");
+        return "#000000";
+    }
+    return color;
+};
+
+let checkDiameter = (diameter) => {
+    let regDiameter = /^(\d){1,3}$/g;
+    if (!regDiameter.test(Number(diameter))) {
+        console.log("Diameter is invalid! Diameter = '250px'");
+        return "250";
+    }
+    return diameter;
+};
+
 let drawCircle = () => {
     let diam = document.forms["forma"].elements["diameter"].value;
     let color = document.forms["forma"].elements["color"].value;
@@ -19,7 +37,7 @@ let drawCircle = () => {
     circle.style.width = diam + "px";
     circle.style.height = diam + "px";
     circle.style.borderRadius = "50%";
-    circle.style.backgroundColor = color.toLowerCase();
+    circle.style.backgroundColor = checkColor(color.toLowerCase());
 
     document.body.innerHTML = "";
     document.body.appendChild(circle);
@@ -29,7 +47,7 @@ let inputData = () => {
     document.body.innerHTML = "";
     document.body.innerHTML =
         "<form id='forma'>" +
-            "<input id='diameter' type='text' value='' placeholder='input diameter value' />" +
+            "<input id='diameter' type='text' value='' placeholder='input diameter value, px' />" +
             "<input id='color' type='text' value='' placeholder='input color value' />" +
             "<input id='runDraw' type='button' value='Draw' onclick='drawCircle()' />" +
         "</form>";
