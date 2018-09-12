@@ -13,7 +13,7 @@
 
 let checkColor = (color) => {
     let regColor = /#[a-f0-9]{3}|#[a-f0-9]{6}|red|aqua|gray|navy|silver|black|green|olive|teal|blue|lime|purple|white|fuchsia|maroon|yellow|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+\s*)?\)/i;
-    if (!regColor.test(color)) {
+    if (!regColor.test(color) || color === null || color === "") {
         console.log("Color is invalid! Color = '000000'");
         return "#000000";
     }
@@ -22,7 +22,7 @@ let checkColor = (color) => {
 
 let checkDiameter = (diameter) => {
     let regDiameter = /^(\d){1,3}$/g;
-    if (!regDiameter.test(Number(diameter))) {
+    if (!regDiameter.test(diameter) || diameter === null || isNaN(diameter) || diameter === 0) {
         console.log("Diameter is invalid! Diameter = '250px'");
         return "250";
     }
@@ -33,7 +33,7 @@ let drawCircle = () => {
     let diam = document.forms["forma"].elements["diameter"].value;
     let color = document.forms["forma"].elements["color"].value;
 
-    diam = checkDiameter(diam);
+    diam = checkDiameter(Number(diam));
     color = checkColor(color.toLowerCase());
 
     let circle = document.createElement('div');
