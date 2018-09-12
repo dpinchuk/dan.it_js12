@@ -30,8 +30,8 @@ let checkDiameter = (diameter) => {
 };
 
 let drawCircle = () => {
-    let diam = document.forms["forma"].elements["diameter"].value;
-    let color = document.forms["forma"].elements["color"].value;
+    let diam = document.forms["forma"].elements["diameter"].value.trim();
+    let color = document.forms["forma"].elements["color"].value.trim();
 
     diam = checkDiameter(Number(diam));
     color = checkColor(color.toLowerCase());
