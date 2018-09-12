@@ -34,10 +34,12 @@ let drawCircle = () => {
     let color = document.forms["forma"].elements["color"].value;
 
     let circle = document.createElement('div');
+    diam = checkDiameter(diam);
+    color = checkColor(color.toLowerCase());
     circle.style.width = diam + "px";
     circle.style.height = diam + "px";
     circle.style.borderRadius = "50%";
-    circle.style.backgroundColor = checkColor(color.toLowerCase());
+    circle.style.backgroundColor = color;
 
     document.body.innerHTML = "";
     document.body.appendChild(circle);
